@@ -653,7 +653,9 @@ require('lazy').setup({
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
-        ensure_installed = { "arduino_language_server" }, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+        ensure_installed = {
+          "arduino_language_server" -- mason might do this anyway but lets be sure
+        },
         automatic_installation = false,
         handlers = {
           function(server_name)
