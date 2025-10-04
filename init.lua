@@ -4,7 +4,7 @@ vim.g.mapleader = '\\'
 vim.g.maplocalleader = '\\'
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -949,18 +949,10 @@ require('lazy').setup({
   },
 })
 
--- Local customizations
---vim.api.nvim_create_autocmd('BufWritePre', {
---  callback = function()
---    vim.lsp.buf.format { async = false }
---  end,
---})
-
 vim.opt.background = 'dark'
 vim.opt.termguicolors = true
 vim.opt.tabstop = 2 -- how wide a TAB is displayed
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
--- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
