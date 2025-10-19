@@ -586,26 +586,7 @@ require('lazy').setup({
       local servers = {
         clangd = {},
         rust_analyzer = {},
-        arduino_language_server = {
-          cmd = {
-            'arduino-language-server',
-            '-cli-config', vim.fn.expand '~/.arduino15/arduino-cli.yaml',
-            '-cli',        'arduino-cli',
-            '-fqbn',       'esp32:esp32:esp32c3',
-            '-clangd',     'clangd',
-          },
-          -- override the updated 'capabilities' defined above by kickstart; otherwise these 
-          -- ones will make the arduino-language-server panic,
-          -- see https://github.com/neovim/nvim-lspconfig/pull/2533
-          capabilities = {
-            textDocument = {
-              semanticTokens = vim.NIL,
-            },
-            workspace = {
-              semanticTokens = vim.NIL,
-            },
-          },
-        },
+        arduino_language_server = {},
         -- gopls = {},
         -- pyright = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -653,9 +634,7 @@ require('lazy').setup({
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
-        ensure_installed = {
-          "arduino_language_server" -- mason might do this anyway but lets be sure
-        },
+        ensure_installed = {},
         automatic_installation = false,
         handlers = {
           function(server_name)
@@ -694,7 +673,8 @@ require('lazy').setup({
         local disable_filetypes = { 
           -- c = true, 
           -- cpp = true,
-          lua = true
+          ino = true, -- arduino-ls has its own formatter that will conflict and corrupt the file
+          lua = true 
         }
         if disable_filetypes[vim.bo[bufnr].filetype] then
           return nil
